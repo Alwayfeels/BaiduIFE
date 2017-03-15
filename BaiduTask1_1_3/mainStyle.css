@@ -9,12 +9,19 @@ div {
     margin: 20px auto;
 }
 #leftBox {
+    position: relative;
     float: left;
     padding: 20px;
     background-color: white;
     width: 160px;
 }
-.logo {
+#leftBox span {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-weight: bold;
+}
+#logo {
     background-color: #eee;
     display: block;
     width: 80px;
@@ -22,9 +29,14 @@ div {
 }
 #rightBox {
     float:right;
-    width:80px;
+    width:120px;
     border:1px solid black;
-    padding: 20px;
+}
+#rightBox .img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 20px;
 }
 #centerBox {
     margin-left:240px;
