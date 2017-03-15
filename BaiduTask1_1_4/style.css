@@ -1,0 +1,51 @@
+body {
+    background-color: orange;
+}
+/*用parents为window的position: absolute来定位需要居中元素的"起始点"在网页的中心*/
+/*再用transform属性调整目标块级'元素的中心点'在'网页的中心*/
+.mainBox {
+    position: absolute;
+    height: 200px;
+    width: 400px;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* box大小调节
+    resize: both;
+    overflow: auto;
+    */
+}
+/* 下面办法在目标盒模型height值变化时会失去页面居中效果*/
+/*
+.mainBox {
+    height: 200px;
+    width: 400px;
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    resize: both;
+    overflow: auto;
+}
+*/
+.LeftUpCircle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #fc0;
+    width: 50px;
+    height: 50px;
+    border-radius: 0 0 100% 0;
+}
+.RightButtonCircle {
+    position: absolute;
+    top: 150px;
+    right: 0;
+    background-color: #fc0;
+    width: 50px;
+    height: 50px;
+    border-radius: 100% 0 0 0;
+}
