@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>零基础HTML及CSS编码（二）</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <nav>
+        <img src="images/beautifulPic.jpg"/>
+        <a href="https://www.zhihu.com/question/19937281" target="_blank">如何选择一双跑鞋？</a>
+        <a href="https://www.zhihu.com/question/20693323" target="_blank">正确的慢跑姿势是怎样的？</a>
+        <a href="https://www.baidu.com/" target="_blank">导航3</a>
+        <a href="https://www.baidu.com/" target="_blank">导航4</a>
+    </nav>
+    <div class="parents">
+        <div class="right">
+            <div class="logIn">
+                <h1>登录</h1>
+                <form>
+                    <table id="logInTable">
+                        <thead></thead>
+                        <tbody>
+                        <tr>
+                            <td>请输入注册邮箱：</td>
+                            <td><input type="text" name="input address name"/></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="tip">邮箱地址请按标准格式填写</td>
+                        </tr>
+                        <tr>
+                            <td>请输入密码：</td>
+                            <td><input type="text" name="input account password"/></td>
+                        </tr>
+                        <tr>
+                            <td>请重复密码：</td>
+                            <td><input type="text" name="input account password again   "/></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="tip">密码格式请按要求</td>
+                        </tr>
+                        <tr>
+                            <td>选择性别:</td>
+                            <td><input type="radio" name="sex" value="male"/>Male
+                                <input type="radio" name="sex" value="female"/>Female
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>城市:</td>
+                            <td>
+                                <select>
+                                    <option value="Beijing">北京</option>
+                                    <option value="Shanghai">上海</option>
+                                    <option value="Guangzhou">广州</option>
+                                    <option value="Shenzhen">深圳</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>你的爱好</td>
+                            <td>
+                                <input type="checkbox" name="hobby" value="movement"/>运动
+                                <input type="checkbox" name="hobby" value="art"/>艺术
+                                <input type="checkbox" name="hobby" value="science"/>科学
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>个人描述：</td>
+                            <td>
+                                <textarea name="textarea" id="textarea" cols="30" rows="10" placeholder="请在此输入个人描述."></textarea>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" value="Submit" id="logButton"/>
+                </form>
+            </div>
+        </div>
+        <div class="left">
+            <div class="article">
+                <h1 class="head1">跑鞋存在的意义</h1>
+                <p class="author">原作者：梦里寻剑，2017年02月23日</p>
+                <h2 class="head2">跑步时的落地方式</h2>
+                <p class="articleText">
+                    跑步时脚的落地方式一般有三种：后脚跟着地、足弓处着地、前脚掌着地(如下图所示)。 <br/>
+                    <img src="images/pic1.png" alt="落地方式"/> <br/>
+                    运动力学领域的学术杂志《Gait & Posture》上的一篇研究文章指出，在一项对900名初级跑者进行的研究中,
+                    <b>绝大多数人在跑步时后脚跟首先落地。</b>
+                    研究者发现,在456名男性研究对象中,96.9%为脚后跟先落地。在447名女性研究对象中,99.3%为脚后跟先落地。
+                    因此，下面主要针对后脚跟着地方式进行介绍。
+                </p>
+                <h2 class="head2">跑步时膝关节为什么会受到损伤</h2>
+                <p class="articleText">
+                    <img src="images/pic2.jpg" alt="跑步时的脚步受力情况"/> <br/>
+                    上图的曲线描绘出了从后脚跟着地至脚掌离开面过程中地面反作用力的变化，很明显看到有两个峰值。第一个峰值是脚后跟接触地面的瞬间，
+                    地面给脚和小腿的反作用力，冲击力峰值基本上反映出了此时地面对脚和小腿冲击力的大小，也是造成损伤的主要原因。当我们后脚跟着地时
+                    ，在很短的时间内（小于0.05秒），几倍于体重的地面反作用力施加在脚跟和脚踝上，尤其是不恰当的跑步姿势使得着地时膝关节伸直，
+                    <b>其附近肌肉难以参与缓冲，只能靠软组织（脂肪垫、关节软骨、半月板）来应对冲击。</b>
+                    这仅仅是一次着地带来的效应，跑步时成千上万次的冲击不断累积，势必使得膝关节承受很大压力，这是为什么膝伤成为大众跑者头号伤痛的
+                    重要诱因之一。很多保护不周的跑步爱好者下半生都承受着巨大的膝盖伤痛折磨，甚至连走路都需要扶着东西才能动。
+                </p>
+                <h2 class="head2">跑鞋的作用</h2>
+                <p class="articleText">
+                    因此，以前没有经过专业训练的，现在跑量比较大的人，需要跑鞋来进行缓冲。就像杯子直接落在地上很容易摔碎，而包上一层海绵后，缓冲
+                    时间变长，就不容易摔碎。慢跑鞋就是类似的原理。慢跑鞋往往有一个比较厚的鞋底，同时采用特殊的鞋底材料与结构来帮助我们进行缓冲。
+                    比如Asics的Gel缓震胶、New Balance的Abzorb泡沫聚酯、Mizuno的Wave波浪板缓震片，都能减少跑步时对膝关节的冲击。因此，
+                    <b>跑鞋不是为了让你跑得更快，而是为了让你跑步的时候不受伤。这就是跑鞋存在的意义。</b>
+                </p>
+            </div>
+            <div class="article">
+                <h1 class="head1">跑鞋有哪些种类</h1>
+                <p class="author">原作者：梦里寻剑，2017年02月23日</p>
+                <h2 class="head2">简介</h2>
+                <p class="articleText">
+                    <b>跑鞋简单归纳一下常见的分类有慢跑鞋、越野鞋、马拉松鞋 、赤足鞋等等。</b>
+                </p>
+                <p class="imgInf">(1)慢跑鞋适合日常平路跑步，鞋底一般较厚，提供比较好的保护性。</p>
+                <img src="images/shoe1.png" alt="慢跑鞋"/>
+                <p class="imgInf">(2) 越野型的跑鞋由于其针对性，鞋底构造与传统跑鞋不同，作为日常公路跑步或者比赛用鞋并不适合。</p>
+                <img src="images/shoe2.png" alt="越野型"/>
+                <p class="imgInf">(3)<b>马拉松鞋</b>和<b>赤足型跑鞋</b>在设计上为了追求速度强调轻量化，而保护性方面就薄弱些，需要有强
+                    壮的腿部和足部力量才能驾驭，比较适用于之前提到的前脚掌着地的跑法，适用于有训练基础的跑者，而且使用寿命相对较短。
+                </p>
+                <img src="images/shoe3.png" alt="马拉松鞋"/>
+                <img src="images/shoe4.png" alt="赤足型"/>
+                <h2 class="head2">慢跑鞋的分类</h2>
+                <p class="articleText">
+                    慢跑鞋可分为缓冲/减震、支撑/稳定型、控制型三种。对应的跑步姿势分别为足内翻，足外翻，严重内翻（一般对应于高足弓、低足弓、扁平足）。
+                    足内翻、足外翻、正常三种跑步姿态可以参考下面三张图。（如果你觉得这部分比较抽象的直接跳过就好，并不影响你选鞋。）
+                </p>
+                <p class="imgInf">(1) 足内翻=脚背向外翻=脚心向内翻=缓冲/减震系跑鞋=underpronation=supination</p>
+                <img src="images/divide1.png"/>
+                <p class="imgInf">(2) 足外翻=脚背向内翻=脚心向外翻=支撑/稳定系跑鞋=overpronation</p>
+                <img src="images/divide2.png"/>
+                <p class="imgInf">(3) 正常=随意=neutral pronation</p>
+                <img src="images/divide3.png" />
+                <p class="imgInf">一般来说可以用高低足弓来判断选哪种跑鞋，见下图。</p>
+                <img src="images/divide4.jpg" />
+                <h2 class="head2">跑鞋的量级</h2>
+                <img class="formImg" src="images/weight1.png" />
+                <img class="formImg" src="images/weight2.png" />
+                <h2 class="head2">快速选择适合的跑鞋</h2>
+                <p class="articleText">
+                    哈哈，前面介绍了那么多，你是否已经看晕了呢？<br/>
+                    没关系，抛开前面那些烦人的内翻外翻之类的概念吧。采用下面方法很快可以很快确定适合的跑鞋。
+                    在 <a href="https://link.zhihu.com/?target=http%3A//www.myprecisionfit.com/">Mizuno官方测试分析网站</a>
+                    上有详细的<b>在线测试</b>，可以帮助你找到适合自己的鞋子。如果你对在线评测不放心的话还可以去提供脚型测试的
+                    <b>实体店检测脚型</b>，比如Asics北京世纪城店就能提供详细的脚型测试报告，并能推荐适合你的Asics跑鞋。
+                    这并不意味着要买Mizuno或者Asics的跑鞋，找到适合你的跑鞋型号后可以在
+                    <a href="http://bbs.runbible.cn/thread-120804-1-1.html">跑鞋矩阵</a>
+                    中找到各个品牌同类型同量级的鞋。当然这两个品牌在跑鞋领域都十分专业，还是很推荐的。
+                </p>
+                <h2 class="head2">结语：</h2>
+                <p class="articleText">
+                    选好跑鞋后就是去买啦。实体店可能会有些溢价，有条件的推荐海淘。当然电商网站有优惠时也可以赶紧剁手。 当然，拿到新鞋后当然要出
+                    去跑跑跑啊~ (end)
+                </p>
+                <img src="images/end.png" >
+            </div>
+            <div class="article">
+                <h1 class="head1">正确的慢跑姿势是怎样的？</h1>
+                <p class="author">原作者：高科，2015年12月05日</p>
+                <h2 class="head2">正确慢跑的十个姿势要领</h2>
+                <ol>
+                    <li>外足弓先着地（包括足跟外侧一起落地）不是足跟先着地。有些时候也可以前脚掌先着地，但不会足跟先着地</li>
+                    <li>摆动腿要向后勾腿（小腿肚子贴近大腿后侧，），这样是为了增加步幅</li>
+                    <li>蹬伸腿要送髋，让髋关节自然发生旋转，简单说腿蹬直屁股收紧</li>
+                    <li><b>从来没有主动摆臂，看着是摆臂的动作其实只是躯干旋转带动肩关节也发生了旋转，手臂的位置可以屈肘在胸前也可以垂放身体两侧</b></li>
+                    <li><b>跑步时收紧下腹和臀部，免得时间长了腰和膝盖疼。</b></li>
+                    <li>胸式呼吸（但是跑动时主要靠腹斜肌参与呼吸）</li>
+                    <li>身体重心稍微前倾，头颈和下巴收回，头始终看前方不能左右晃动</li>
+                    <li>每步的腾空时间要短，脚掌是将自己向前贴着地面推进。</li>
+                    <li><b>酸痛可以有，但你要接纳它，接纳它就是打开自己，打开自己酸痛就远离你了</b></li>
+                    <li>跑步的强度控制在是有些累，但是可以坚持，不要一次把自己冲爆了。</li>
+                </ol>
+                <h2 class="head2">落地姿势矩阵</h2>
+                <table border="1">
+                    <thead>
+                    <tr>
+                        <td>落地姿势</td>
+                        <td>能力要求</td>
+                        <td>装备要求</td>
+                        <td>状态</td>
+                        <td>习惯</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>前脚掌</td>
+                        <td>★★★</td>
+                        <td>★☆☆</td>
+                        <td>高配速</td>
+                        <td>怎么舒服怎么来</td>
+                    </tr>
+                    <tr>
+                        <td>全脚掌</td>
+                        <td>★★☆</td>
+                        <td>★★☆</td>
+                        <td>中高配速</td>
+                        <td>怎么舒服怎么来</td>
+                    </tr>
+                    <tr>
+                        <td>后脚跟</td>
+                        <td>★☆☆</td>
+                        <td>★★★</td>
+                        <td>慢跑</td>
+                        <td>怎么舒服怎么来</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="picWall">
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+                <img src="images/beautifulPic.jpg" alt="beautifulMiku"/>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <p>本页面由Alwayfeels编写</p>
+</footer>
+</html>
