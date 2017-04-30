@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 04</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div id="top" style="display: inline">
+        <input type="text" id="inputText"/>
+        <button id="btnLeftIn">左侧入</button>
+        <button id="btnRightIn">右侧入</button>
+        <button id="btnLeftOut">左侧出</button>
+        <button id="btnRightOut">右侧出</button>
+    </div>
+    <div id="display">
+        <span id="displayLi" style="display: inline">
+
+        </span>
+    </div>
+    <script type="text/javascript">
+        //绑定变量
+        var inputText = document.getElementById('inputText');
+        var displayLi = document.getElementById('displayLi');
+        var btnLeftIn = document.getElementById('btnLeftIn');
+        var btnRightIn = document.getElementById('btnRightIn');
+        var btnLeftOut = document.getElementById('btnLeftOut');
+        var btnRightOut = document.getElementById('btnRightOut');
+        //插入数字函数
+        function insert(direction){
+            if (!inputText.value) {
+                alert("input is null");
+            }
+            else if (isNaN(inputText.value) == true) {
+                alert("input illegal")
+            }
+            else {
+                var li = document.createElement('li');
+                li.innerHTML = inputText.value;
+                if (direction === "left") {
+                    displayLi.insertBefore(li, displayLi.childNodes[0]);
+                }
+                else if (direction === "right") {
+                    displayLi.appendChild(li);
+                }
+            }
+        }
+        //删除数字函数
+        function popping(direction) {
+            if (!displayLi.hasChildNodes()) {
+                alert("list is null!");
+            }
+            else if (direction === 'left') {
+                alert('弹出' + displayLi.firstChild.innerHTML);
+                displayLi.removeChild(displayLi.firstChild);
+            }
+            else if (direction === 'right') {
+                alert('弹出' + displayLi.lastChild.innerHTML);
+                displayLi.removeChild(displayLi.lastChild);
+            }
+        }
+        //对Li内的DOM节点增加鼠标点击的事件监听，点击节点时删除节点
+        displayLi.addEventListener('click', function(e) {
+            displayLi.removeChild(e.target);
+        });
+        //按钮绑定函数
+        btnLeftIn.onclick = function(){insert('left');};
+        btnRightIn.onclick = function(){insert('right');};
+        btnLeftOut.onclick = function(){popping('left');};
+        btnRightOut.onclick = function(){popping('right');};
+    </script>
+</body>
+</html>
