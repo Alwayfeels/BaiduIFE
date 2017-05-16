@@ -80,16 +80,6 @@
     displayLi.addEventListener('click', function(e) {
         displayLi.removeChild(e.target);
     });
-    //将Html的number取出到arr（已整合至bubbleSort()内）
-    //function sortPrepare() {
-    //    var array = displayLi.getElementsByTagName("li");
-    //    var arr = [];
-    //    for (var i = 0; i < array.length; i++) {
-    //         arr.push(array[i].innerText);
-    //    }
-    //    return arr
-    //}
-    // 交换函数
     function swap(items, firstIndex, secondIndex) {
         var temp = items[firstIndex];
         items[firstIndex] = items[secondIndex];
@@ -110,18 +100,10 @@
             for (j = 0, stop = len-i-1; j < stop; j++) {
                 if (parseInt(arr[j]) > parseInt(arr[j+1])) {
                     swap(arr, j, j+1);
-                    //长度转换(已转移至timeView())
-                    //var temp = array[j].style.height;
-                    //array[j].style.height = array[j+1].style.height;
-                    //array[j+1].style.height = temp;
                     times.push(JSON.parse(JSON.stringify(arr)));
                 }
             }
         }
-        //将排序后的arr返回填充到html(已转移至timeView())
-        //for (var k=0; k<arr.length; k++) {
-        //    displayLi.getElementsByTagName("li")[k].innerText = arr[k];
-        //}
         return times;
     };
     function timeView() {
