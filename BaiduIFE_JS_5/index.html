@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 04</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="top" style="display: inline">
+    <input type="text" id="inputText"/>
+    <button id="btnLeftIn">左侧入</button>
+    <button id="btnRightIn">右侧入</button>
+    <button id="btnLeftOut">左侧出</button>
+    <button id="btnRightOut">右侧出</button>
+</div>
+<div id="display">
+        <span id="displayLi" style="display: inline">
+
+        </span>
+</div>
+<button id="bubbleSort">冒泡排序</button>
+<script type="text/javascript">
+    //绑定变量
+    var inputText = document.getElementById('inputText');
+    var displayLi = document.getElementById('displayLi');
+    var btnLeftIn = document.getElementById('btnLeftIn');
+    var btnRightIn = document.getElementById('btnRightIn');
+    var btnLeftOut = document.getElementById('btnLeftOut');
+    var btnRightOut = document.getElementById('btnRightOut');
+    var btnBubbleSort = document.getElementById('bubbleSort');
+    //判断10~100的数字
+    function juge(num) {
+        if (num >= 10 && num <= 100) {
+            return true
+        } else {
+            return false
+        }
+    }
+    //插入数字函数
+    function insert(direction){
+        if (!inputText.value) {
+            alert("input is null");
+        }
+        else if (isNaN(inputText.value) == true) {
+            alert("input illegal")
+        }
+        else if (!juge(inputText.value)) {
+            alert("请输入10-100的数字")
+        }
+        else if (displayLi.childNodes.length > 60) {
+            alert("队列元素超过60了")
+        }
+        else {
+            var li = document.createElement('li');
+            li.innerText = inputText.value;
+            li.style.height = 2 * inputText.value+'px';
+            if (direction === "left") {
+                displayLi.insertBefore(li, displayLi.childNodes[0]);
+            }
+            else if (direction === "right") {
+                displayLi.appendChild(li);
+            }
+        }
+    }
+    //删除数字函数
+    function popping(direction) {
+        if (displayLi.getElementsByTagName("li").length == 0) {
+            alert("list is null!");
+        }
+        else if (direction === 'left') {
+            alert('弹出' + displayLi.firstChild.innerHTML);
+            displayLi.removeChild(displayLi.firstChild);
+        }
+        else if (direction === 'right') {
+            alert('弹出' + displayLi.lastChild.innerHTML);
+            displayLi.removeChild(displayLi.lastChild);
+        }
+    }
+    //点击节点时删除节点
+    displayLi.addEventListener('click', function(e) {
+        displayLi.removeChild(e.target);
+    });
+    //将Html的number取出到arr（已整合至bubbleSort()内）
+    //function sortPrepare() {
+    //    var array = displayLi.getElementsByTagName("li");
+    //    var arr = [];
+    //    for (var i = 0; i < array.length; i++) {
+    //         arr.push(array[i].innerText);
+    //    }
+    //    return arr
+    //}
+    // 交换函数
+    function swap(items, firstIndex, secondIndex) {
+        var temp = items[firstIndex];
+        items[firstIndex] = items[secondIndex];
+        items[secondIndex] = temp;
+        return items;
+    };
+    function bubbleSort() {
+        //var arr = sortPrepare();
+        var array = displayLi.getElementsByTagName("li");
+        var arr = [];
+        for (var i = 0; i < array.length; i++) {
+            arr.push(array[i].innerText);
+        }
+        //对arr进行冒泡排序
+        var len = arr.length, i, j, stop;
+        var times = [];
+        for (i = 0; i < len; i++){
+            for (j = 0, stop = len-i-1; j < stop; j++) {
+                if (parseInt(arr[j]) > parseInt(arr[j+1])) {
+                    swap(arr, j, j+1);
+                    //长度转换(已转移至timeView())
+                    //var temp = array[j].style.height;
+                    //array[j].style.height = array[j+1].style.height;
+                    //array[j+1].style.height = temp;
+                    times.push(JSON.parse(JSON.stringify(arr)));
+                }
+            }
+        }
+        //将排序后的arr返回填充到html(已转移至timeView())
+        //for (var k=0; k<arr.length; k++) {
+        //    displayLi.getElementsByTagName("li")[k].innerText = arr[k];
+        //}
+        return times;
+    };
+    function timeView() {
+        var data = bubbleSort();
+        if (data.length == 0) {
+            return alert("input is none!");
+        }
+        var loop = 0;
+        var init = setInterval(function() {
+            for (var i = 0; i < data[loop].length; i++) {
+                displayLi.getElementsByTagName("li")[i].innerText = data[loop][i];
+                displayLi.getElementsByTagName("li")[i].style.height = 2 * data[loop][i] + 'px';
+            }
+            loop++;
+            if (loop == data.length) {
+                window.clearInterval(init);
+            }
+        }, 200);
+    }
+    //按钮绑定函数
+    btnLeftIn.onclick = function(){insert('left');};
+    btnRightIn.onclick = function(){insert('right');};
+    btnLeftOut.onclick = function(){popping('left');};
+    btnRightOut.onclick = function(){popping('right');};
+    btnBubbleSort.onclick = function(){timeView()}
+</script>
+</body>
+</html>
