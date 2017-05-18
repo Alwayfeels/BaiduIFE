@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 04</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="top" style="display: inline">
+    <textarea type="text" id="inputText"></textarea>
+    <button id="btnLeftIn">左侧入</button>
+    <button id="btnRightIn">右侧入</button>
+    <button id="btnLeftOut">左侧出</button>
+    <button id="btnRightOut">右侧出</button>
+</div>
+<div id="display">
+        <span id="displayLi" style="display: inline">
+
+        </span>
+</div>
+<input type="text" id="check"/>
+<button id="btnCheck">查询</button>
+<script type="text/javascript">
+    //绑定变量
+    var inputText = document.getElementById('inputText');
+    var displayLi = document.getElementById('displayLi');
+    var btnLeftIn = document.getElementById('btnLeftIn');
+    var btnRightIn = document.getElementById('btnRightIn');
+    var btnLeftOut = document.getElementById('btnLeftOut');
+    var btnRightOut = document.getElementById('btnRightOut');
+    var btnCheck = document.getElementById('btnCheck');
+    //判断10~100的数字
+    function split(str) {
+        var text = str;
+        var regex = new RegExp("[\uff0c\u3001, \n]");
+        if (text.split(regex).length == 1) {
+            return text
+        }
+        return text.split(regex);
+    }
+    //插入数字函数
+    function insert(direction){
+        if (!inputText.value) {
+            alert("input is null");
+        }
+        else if (displayLi.childNodes.length > 60) {
+            alert("队列元素超过60了")
+        }
+        //以目标字符分割char
+        else {
+            var textArr = split(inputText.value);
+            if (direction === "left") {
+                if (typeof textArr == "object") {
+                    for (var i=textArr.length-1; i>=0; i--) {
+                        var lileft = document.createElement('li');
+                        lileft.innerText = textArr[i];
+                        displayLi.insertBefore(lileft, displayLi.childNodes[0]);
+                    }
+                } else {
+                    lileft = document.createElement("li");
+                    lileft.innerText = textArr;
+                    displayLi.insertBefore(lileft, displayLi.childNodes[0]);
+                }
+            }
+            else if (direction === "right") {
+                if (typeof textArr == "object") {
+                    for (var j=0; j<textArr.length; j++) {
+                        var liright = document.createElement('li');
+                        liright.innerText = textArr[j];
+                        displayLi.appendChild(liright);
+                    }
+                } else {
+                    liright = document.createElement("li");
+                    liright.innerText = textArr;
+                    displayLi.appendChild(liright);
+                }
+
+            }
+            else {
+                console.log("insert(derection) derection is illegal");
+                return false;
+            }
+        }
+    }
+    //删除数字函数
+    function popping(direction) {
+        if (displayLi.getElementsByTagName("li").length == 0) {
+            alert("list is null!");
+        }
+        else if (direction === 'left') {
+            alert('弹出"' + displayLi.firstChild.innerHTML + '"');
+            displayLi.removeChild(displayLi.firstChild);
+        }
+        else if (direction === 'right') {
+            alert('弹出"' + displayLi.lastChild.innerHTML + '"');
+            displayLi.removeChild(displayLi.lastChild);
+        }
+    }
+    //点击节点时删除节点
+    displayLi.addEventListener('click', function(e) {
+        displayLi.removeChild(e.target);
+    });
+    //查询
+    function check() {
+        var checkText = document.getElementById("check").value;
+        var arr = document.getElementsByTagName("li");
+        for (var i=0; i<arr.length; i++) {
+            if (arr[i].innerText.indexOf(checkText) == 0) {
+                arr[i].style.backgroundColor = 'green';
+            }
+        }
+    }
+    //按钮绑定函数
+    btnLeftIn.onclick = function(){insert('left');};
+    btnRightIn.onclick = function(){insert('right');};
+    btnLeftOut.onclick = function(){popping('left');};
+    btnRightOut.onclick = function(){popping('right');};
+    btnCheck.onclick = function(){check()}
+</script>
+</body>
+</html>

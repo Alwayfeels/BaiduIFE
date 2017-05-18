@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+    <span id="test"></span>
+    <script type="text/javascript">
+        var text = 'abc def,ghi、jkl，mno';
+        var regex = new RegExp("[\uff0c\u3001, \n]");
+        console.log(text.split([\uff0c\u3001, \n]));
+    </script>
+</body>
+</html>
