@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>clouser test 2</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        for(var i=1;i<5;i++){
+            (function(i){
+                setTimeout(function(){console.log(i*1000)},i*1000);
+            })(i)
+        }
+    </script>
+</body>
+</html>
