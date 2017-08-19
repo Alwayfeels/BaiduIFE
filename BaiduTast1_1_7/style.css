@@ -1,6 +1,94 @@
+body {
+    padding: 0;
+    border: 0;
+    background-color: rgba(68, 68, 68, 0.5);
+}
+.container {
+    overflow: hidden;
+    clear: both;
+    width: 100%;
+}
+/*
+    Õ®”√
+*/
 .left {
     float: left;
 }
 .right {
     float: right;
 }
+/*
+    µº∫Ω
+*/
+.navigation {
+    width: 1170px;
+    height: 60px;
+    background-color: white;
+    margin: 0 auto;
+}
+.navigation i {
+    display: inline-block;
+    width: 54px;
+    height: 53px;
+    background: url("images/Task_7_logo.png") no-repeat 0 0;
+    margin: 0 10px -9px 0;
+}
+.navigation h3 {
+    font: normal 21px SimHei;
+    color: #000;
+    margin: -5px 0 0 0;
+}
+.nav_bar {
+    list-style: none;
+    display: block;
+    margin: 0;
+}
+.nav_bar li {
+    float: left;
+    width: 65px;
+    height: 55px;
+    margin-right: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+.nav_bar .log_in {
+    padding-right: 8px;
+}
+.nav_bar .log_in a {
+    color: red;
+}
+.nav_bar .log_in i {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url("images/Task_7_logo.png") no-repeat -51px -10px;
+    margin: 0 0 -2px 0;
+}
+.nav_bar li a {
+    font: normal 14px/55px Œ¢»Ì—≈∫⁄;
+    text-decoration: none;
+}
+.navigation .nav_bar li:hover {
+    border-bottom: 5px solid #E74F4D;
+}
+/*
+    part 1
+*/
+#part_1 {
+
+}
+#part_1 .img_1a {
+    background: url("images/part_1_img.png") no-repeat 0 0;
+    background-size: 1170px auto;
+    height: 778px;
+    width: 1170px;
+    margin: 0 auto;
+}
+#part_1 .shade_1 {
+    background-color: black;
+    opacity: 0.2;
+    width: 100%;
+    height: 100%;
+}
+#part_1
+

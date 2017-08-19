@@ -3,8 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <title>IFE JavaScript Task 07</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <main></main>
+    <div class="container">
+        <div id="tree_1">
+            <div class="tree_2">
+                <div class="tree_3">
+                    <div class="tree_4"></div>
+                    <div class="tree_4"></div>
+                </div>
+                <div class="tree_3">
+                    <div class="tree_4"></div>
+                    <div class="tree_4"></div>
+                </div>
+            </div>
+            <div class="tree_2">
+                <div class="tree_3">
+                    <div class="tree_4"></div>
+                    <div class="tree_4"></div>
+                </div>
+                <div class="tree_3">
+                    <div class="tree_4"></div>
+                    <div class="tree_4"></div>
+                </div>
+            </div>
+        </div>
+        <button>前序遍历</button>
+        <button>中序遍历</button>
+        <button>后序遍历</button>
+    </div>
+    <script type="text/javascript">
+        var buttons = document.getElementsByTagName("button");
+        var traversal_1 = buttons[0];
+        var traversal_2 = buttons[1];
+        var traversal_3 = buttons[2];
+        var showList = [];
+        var firstNode = document.getElementById("tree_1");
+        var timer = null;
+
+        //前序遍历
+        function beforeOrder(node) {
+            if(node != null) {
+                showList.push(node);
+                beforeOrder(node.firstElementChild);
+                beforeOrder(node.lastElementChild);
+            }
+        }
+        //中序遍历
+        function middleOrder(node) {
+            if (node != null) {
+                middleOrder(node.firstElementChild);
+                showList.push(node);
+                middleOrder(node.lastElementChild);
+            }
+        }
+        //后续遍历
+        function afterOrder(node) {
+            if (node != null) {
+                afterOrder(node.firstElementChild);
+                afterOrder(node.lastElementChild);
+                showList.push(node);
+            }
+        }
+        //showList改变背景颜色
+        function showNode(list) {
+            var i = 0;
+            list[i].style.backgroundColor = "green";
+            timer = setInterval(function () {
+                i++;
+                if (i < list.length) {
+                    list[i-1].style.backgroundColor = "white";
+                    list[i].style.backgroundColor = "green";
+                } else {
+                    list[i-1].style.backgroundColor = "white";
+                    clearInterval(timer);
+                }
+            }, 500);
+        }
+
+        function Init() {
+            showList = [];
+            clearInterval(timer);
+            var divs = document.getElementsByTagName("div");
+            for (var i=0; i < divs.length; i++) {
+                divs[i].style.backgroundColor = "white";
+            }
+        }
+        traversal_1.addEventListener("click", function() {
+            Init();
+            beforeOrder(firstNode);
+            showNode(showList);
+        });
+        traversal_2.addEventListener("click", function(){
+            Init();
+            middleOrder(firstNode);
+            showNode(showList);
+        });
+        traversal_3.addEventListener("click", function(){
+            Init();
+            afterOrder(firstNode);
+            showNode(showList);
+        });
+    </script>
 </body>
 </html>
