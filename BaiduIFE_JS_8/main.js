@@ -32,19 +32,33 @@ window.onload = function () {
         }
     }
     //上色
-    function showNode(list) {
+    function showNode(text) {
         var i = 0;
-        list[i].style.backgroundColor = "green";
+        if (showList[i].firstChild.nodeValue.replace(/(^\s*)|(\s*$)/g,"") == text) {
+            showList[i].style.backgroundColor = "blue";
+            return true;
+        }
+        showList[i].style.backgroundColor = "green";
         timer = setInterval(function () {
             i++;
-            if (i < list.length) {
-                list[i-1].style.backgroundColor = "white";
-                list[i].style.backgroundColor = "green";
+            if (i < showList.length) {
+                showList[i-1].style.backgroundColor = "white";
+                if (showList[i].firstChild.nodeValue.replace(/(^\s*)|(\s*$)/g,"") == text) {
+                    showList[i].style.backgroundColor = "blue";
+                    clearInterval(timer);
+                } else {
+                    showList[i].style.backgroundColor = "green";
+                }
             } else {
-                list[i-1].style.backgroundColor = "white";
+                showList[i-1].style.backgroundColor = "white";
+                if (text != undefined) {
+                    alert("搜索完成，未找到查找字符！");
+                } else {
+                    alert("搜索完成！")
+                }
                 clearInterval(timer);
             }
-        }, 500);
+        }, 300);
     }
     //初始化
     function Init() {
@@ -60,12 +74,31 @@ window.onload = function () {
     deepTraverseBtn.addEventListener("click", function () {
         Init();
         deepTraverse(startNode);
-        showNode(showList);
+        showNode();
     });
     wideTraverseBtn.addEventListener("click", function () {
         Init();
         wideTraverse(startNode);
-        showNode(showList);
+        showNode();
     });
-    console.log(startNode.nextElementSibling)
+    deepCheckBtn.addEventListener("click", function () {
+        var inputText = document.getElementById("checkNum").value;
+        Init();
+        deepTraverse(startNode);
+        if (inputText != "") {
+            showNode(inputText);
+        } else {
+            alert("输入为空！");
+        }
+    });
+    wideCheckBtn.addEventListener("click", function () {
+        var inputText = document.getElementById("checkNum").value;
+        Init();
+        wideTraverse(startNode);
+        if (inputText != "") {
+            showNode(inputText);
+        } else {
+            alert("输入为空！");
+        }
+    });
 }
