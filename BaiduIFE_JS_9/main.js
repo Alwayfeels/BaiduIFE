@@ -14,6 +14,7 @@ window.onload = function () {
     var index = 0;
     var timer = null;
     /*
+    本来想用focus伪类做，但是实现太复杂了。不如直接给div绑定一个点击事件改变style属性
     var divs = document.getElementsByTagName("div");
     function giveTabindex () {
         for (var i = 0; i < divs.length; i++) {
@@ -130,14 +131,24 @@ window.onload = function () {
     });
     delBtn.addEventListener("click", function () {
         var focusNode = document.getElementsByClassName("focus")[0];
-        focusNode.remove();
+        if (focusNode == undefined) {
+            alert("删除节点未选中！");
+        } else {
+            focusNode.remove();
+        }
     });
     addBtn.addEventListener("click", function () {
         var addText = document.getElementById("addBox").value;
         var newNode = document.createElement("div");
         var focusNode = document.getElementsByClassName("focus")[0];
-        newNode.className += "lv" + (parseInt(focusNode.className.slice(2,3)) + 1);
-        newNode.innerHTML = addText;
-        focusNode.appendChild(newNode);
+        if (addText == "") {
+            alert("输入元素为空！");
+        } else if (focusNode == undefined){
+            alert("插入节点未选中！");
+        } else {
+            newNode.className += "lv" + (parseInt(focusNode.className.slice(2,3)) + 1);
+            newNode.innerHTML = addText;
+            focusNode.appendChild(newNode);
+        }
     })
 }

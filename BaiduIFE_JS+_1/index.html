@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单检验（一）</title>
+    <style>
+        div {
+            width: 300px;
+            margin: 20px auto;
+        }
+        .name {
+            font: normal 1em 微软雅黑;
+            margin-right: 20px;
+        }
+        input {
+            border-radius: 5px;
+            border: 1px solid #afafaf;
+            outline: none;
+            margin-right: 20px;
+        }
+        .hint {
+            font: normal 0.7em 微软雅黑;
+            color: #afafaf;
+            margin: 0 auto 0 52px;
+        }
+    </style>
+</head>
+<body>
+    <form action="#">
+        <div id="box1">
+            <span class="name">名称</span><input type="text" id="no1"/><button id="button1">验证</button>
+            <p class="hint">必填，长度为4~16个字符</p>
+        </div>
+        <div id="box2">
+            <span class="name">名称</span><input type="text" id="no2"/><button id="button2">验证</button>
+            <p class="hint"></p>
+        </div>
+        <div id="box3">
+            <span class="name">名称</span><input type="text" id="no3"/><button id="button3">验证</button>
+            <p class="hint"></p>
+        </div>
+    </form>
+    <script type="text/javascript" >
+        var btn1 = document.getElementById("button1");
+        var btn2 = document.getElementById("button2");
+        var btn3 = document.getElementById("button3");
+
+        function validate(inputNode, alertTxt) {
+            var inputTxt = inputNode.value;
+            if (inputTxt == ""||inputTxt == null) {
+                inputNode.style.border = "1px solid red";
+                var hint = inputNode.parentElement.lastElementChild;
+                hint.innerText = alertTxt;
+                hint.style.color = "red";
+                inputNode.focus();
+                return false;
+            } else if ( judge(inputTxt) ){
+                illWarm(inputNode);
+                return false;
+            } else {
+                successful(inputNode);
+                return true
+            }
+        }
+        function successful (node) {
+            node.style.border = "1px solid green";
+            var hint = node.parentElement.lastElementChild;
+            hint.style.color = "green";
+            hint.innerText = "名称格式正确";
+        }
+        function illWarm (node) {
+            node.focus();
+            node.style.border = "1px solid red";
+            var hint = node.parentElement.lastElementChild;
+            hint.innerHTML = "名称格式长度应为4~16个字符";
+            hint.style.color = "red";
+        }
+        function judge(txt) {
+            var len = txt.replace(/[^x00-xff]/g, "00");
+            if (len.length < 4 || len.length > 16) {
+                return true;
+            }
+            return false;
+        }
+        btn1.addEventListener("click", function() {
+            var inputNode = document.getElementById("no1");
+            validate(inputNode, "名称不能为空");
+        });
+        btn2.addEventListener("click", function () {
+            var inputNode = document.getElementById("no2");
+            validate(inputNode, "名称不能为空")
+        });
+        btn3.addEventListener("click", function () {
+            var inputNode = document.getElementById("no3");
+            validate(inputNode, "名称不能为空")
+        });
+    </script>
+</body>
+</html>
