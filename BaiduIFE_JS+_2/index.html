@@ -34,7 +34,7 @@
     </style>
 </head>
 <body>
-<form action="#">
+<form action="#" name="form" onsubmit="return validation()">
     <div id="box1">
         <label for="no1" class="name">名称</label><input type="text" id="no1"/>
         <p class="hint">必填，长度为4~16个字符</p>
@@ -63,8 +63,24 @@
     var input3 = document.getElementById("no3");
     var input4 = document.getElementById("no4");
     var input5 = document.getElementById("no5");
-    var checkBtn =
+    var checkBtn = document.getElementById("sub");
+    var hintP = document.getElementsByTagName("p");
 
+    function validation() {
+        var sum = 0;
+        for (var i = 0; i < hintP.length; i++) {
+            if(hintP[i].style.color == "green") {
+                sum = sum + 1;
+            } else {
+                sum = 0;
+            }
+        }
+        if (sum == 5) {
+            alert("验证成功");
+        } else {
+            alert("验证失败");
+        }
+    }
     function validate(inputNode, nullTxt, illegalTxt, successTxt, order) {
         var inputTxt = inputNode.value;
         if (inputTxt == ""||inputTxt == null) {

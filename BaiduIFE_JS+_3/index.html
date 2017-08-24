@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单检验（三）</title>
+    <style>
+        form {
+            width: 100%;
+            margin: 300px auto;
+            text-align: center;
+        }
+        input {
+            margin-left: 50px;
+        }
+        label {
+            font: normal 1.2em 微软雅黑;
+        }
+        option {
+            font: normal 1.2em 微软雅黑;
+        }
+        select {
+            font-size: 1.2em;
+            margin: 20px 10px 0 10px;
+            width: 300px;
+            height: 40px;
+            border-radius: 5px;
+            border: 2px solid gray;
+            outline: none;
+        }
+        #unstuBox {
+            display: none;
+        }
+        #workplace {
+            margin-top: 20px;
+            font-size: 1.2em;
+            width: 570px;
+            height: 35px;
+            border-radius: 5px;
+            border: 2px solid gray;
+            outline: none;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div class="isstuBox">
+            <input name="isstu" type="radio" id="isstu" checked/>
+            <label for="isstu" class="selLabel">在校生</label>
+            <input name="isstu" type="radio" id="unstu"/>
+            <label for="unstu" class="selLabel">非在校生</label>
+        </div>
+        <div id="isstuBox">
+            <label for="citySel">学校</label>
+            <select name="schoolSel" id="citySel">
+                <option value="成都">成都</option>
+                <option value="北京">北京</option>
+                <option value="上海">上海</option>
+                <option value="贵州">贵州</option>
+            </select>
+            <select name="schoolSel" id="schoolSel">
+                <option>四川大学</option>
+                <option>电子科技大学</option>
+                <option>西南民族大学</option>
+                <option>成都信息工程大学</option>
+            </select>
+        </div>
+        <div id="unstuBox">
+            <label for="workplace">就业单位</label>
+            <input type="text" name="workplace" id="workplace">
+        </div>
+    </form>
+    <script type="text/javascript">
+        var cityVal = document.getElementById("citySel").value;
+        var unStu = document.getElementById("unstu");
+        var isStu = document.getElementById("isstu");
+        var schoolBox = document.getElementById("isstuBox");
+        var workBox = document.getElementById("unstuBox");
+
+        var select = document.getElementsByTagName("select");
+        unStu.addEventListener("click", function () {
+            schoolBox.style.display = "none";
+            workBox.style.display = "block";
+        });
+        isStu.addEventListener("click", function () {
+            schoolBox.style.display = "block";
+            workBox.style.display = "none";
+        });
+        select[0].onchange = function () {
+            chooseSchool(select[0].value);
+        };
+        function chooseSchool(city) {
+            select[1].options.length = 0;
+            switch (city) {
+                case "成都":
+                    select[1].add(new Option("四川大学"));
+                    select[1].add(new Option("电子科技大学"));
+                    select[1].add(new Option("西南民族大学"));
+                    select[1].add(new Option("成都信息工程大学"));
+                    break;
+                case "北京":
+                    select[1].add(new Option("清华大学"));
+                    select[1].add(new Option("北京大学"));
+                    select[1].add(new Option("中国传媒大学"));
+                    select[1].add(new Option("中国公安大学"));
+                    break;
+                case "上海":
+                    select[1].add(new Option("复旦大学"));
+                    select[1].add(new Option("同济大学"));
+                    select[1].add(new Option("上海交通大学"));
+                    select[1].add(new Option("华东师范大学"));
+                    break;
+                case "贵州":
+                    select[1].add(new Option("贵州大学"));
+                    select[1].add(new Option("贵州财经大学"));
+                    select[1].add(new Option("遵义医科大学"));
+                    select[1].add(new Option("贵州师范大学"));
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
