@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务四：听指令的小方块</title>
+    <style>
+        .container {
+            text-align: center;
+        }
+        #chessboard {
+            margin: 0 auto;
+            width: auto;
+            height: auto;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+        #chessboard td {
+            border: 1px solid gray;
+            display: table-cell;
+            width: 50px;
+            height: 50px;
+        }
+        .Up {
+            width: 100%;
+            height: 35px;
+            border-top: 15px solid red;
+        }
+        .Button {
+            width: 100%;
+            height: 35px;
+            border-bottom: 15px solid red;
+        }
+        .Left {
+            height: 100%;
+            width: 35px;
+            border-left: 15px solid red;
+        }
+        .Right {
+            height: 100%;
+            width: 35px;
+            border-right: 15px solid red;
+        }
+        .target {
+            background-color: green;
+        }
+        #order {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>如图，实现一个类似棋盘的格子空间，每个格子用两个数字可以定位，一个红正方形的<br/>
+            DOM 在这个空间内，正方形中的红色边表示这是他的正面，有一个 input 输入框.
+        </p>
+
+        <p> 在输入框中允许输入如下指令，按下按钮后，使得正方形做相应动作:
+            <ul type="none">
+            <li>GO：向蓝色边所面向的方向前进一格（一格等同于正方形的边长）</li>
+            <li>TUN LEF：向左转（逆时针旋转 90 度）</li>
+            <li>TUN RIG：向右转（顺时针旋转 90 度） </li>
+            <li>TUN BAC：向右转（旋转 180 度）</li>
+            </ul>
+        </p>
+        <p> 移动不能超出格子空间.</p>
+        <table id="chessboard">
+        </table>
+        <label for="order"></label>
+        <input type="text" name="order" id="order"/>
+        <button type="button" id="orderSub">提交</button>
+    </div>
+    <script type="text/javascript">
+        var chessboard = document.getElementById("chessboard");
+        var order = document.getElementById("order");
+        var orderSub = document.getElementById("orderSub");
+        var position = [5,5];
+
+        function maketable(ChessX, ChessY) {
+            var x = ChessX + 1;
+            var y = ChessY + 1;
+            for (var i = 0; i < y; i++) {
+                var tr = document.createElement("tr");
+                for (var j = 0; j < x; j++) {
+                    tr.appendChild(document.createElement("td"))
+                }
+                chessboard.appendChild(tr);
+            }
+            var firstX = chessboard.firstElementChild.childNodes;
+            for (var k = 1; k < firstX.length; k++) {
+                firstX[k].style.border = 0;
+                firstX[k].style.textAlign = "center";
+                firstX[k].innerText = k;
+            }
+            var firstY = chessboard.childNodes;
+            for (var q = 1; q < firstY.length; q++) {
+                firstY[q].firstElementChild.style.border = 0;
+                firstY[q].firstElementChild.style.textAlign = "center";
+                firstY[q].firstElementChild.innerText = q - 1;
+            }
+        }
+        function chooseCell(x, y) {
+            var yline = document.getElementsByTagName("tr")[y];
+            return yline.childNodes[x];
+        }
+        function cellLight(x, y, dir) {
+            var target = chooseCell(x, y);
+            var direction = document.createElement("div");
+            if (dir == ""||dir == undefined) {
+                direction.className = "Button";
+            } else {
+                direction.className = dir;
+            }
+            target.className = "target";
+            target.appendChild(direction);
+        }
+        function cellDark(x, y) {
+            var target = chooseCell(x, y);
+            target.innerHTML = "";
+            target.className = "";
+        }
+        /*
+        function gainXY() {
+            var target = document.getElementsByClassName("target");
+            console.log(target);
+        }
+        */
+        function changeDir(node, order) {
+            var div = node.firstElementChild;
+            switch (div.className) {
+                case "Up":
+                    switch (order) {
+                        case "TUN LEF":
+                            div.className = "Left";
+                            break;
+                        case "TUN RIG":
+                            div.className = "Right";
+                            break;
+                        case "TUN BAC":
+                            div.className = "Button";
+                            break;
+                        case "GO":
+                            if (position[1] == 1) {
+                                alert("再走就撞墙了哥");
+                                return false;
+                            }
+                            cellDark(position[0], position[1]);
+                            cellLight(position[0], position[1] - 1, div.className);
+                            position = [position[0], position[1] - 1];
+                            break;
+                        default :
+                            alert("命令无效");
+                    }
+                    break;
+                case "Left":
+                    switch (order) {
+                        case "TUN LEF":
+                            div.className = "Button";
+                            break;
+                        case "TUN RIG":
+                            div.className = "Up";
+                            break;
+                        case "TUN BAC":
+                            div.className = "Right";
+                            break;
+                        case "GO":
+                            if (position[0] == 1) {
+                                alert("再走就撞墙了哥");
+                                return false;
+                            }
+                            cellDark(position[0], position[1]);
+                            cellLight(position[0] - 1, position[1], div.className);
+                            position = [position[0] - 1, position[1]];
+                            break;
+                        default :
+                            alert("命令无效");
+                    }
+                    break;
+                case "Button":
+                    switch (order) {
+                        case "TUN LEF":
+                            div.className = "Right";
+                            break;
+                        case "TUN RIG":
+                            div.className = "Left";
+                            break;
+                        case "TUN BAC":
+                            div.className = "Up";
+                            break;
+                        case "GO":
+                            if (position[1] == 10) {
+                                alert("再走就撞墙了哥");
+                                return false;
+                            }
+                            cellDark(position[0], position[1]);
+                            cellLight(position[0], position[1] + 1, div.className);
+                            position = [position[0], position[1] + 1];
+                            break;
+                        default :
+                            alert("命令无效");
+                    }
+                    break;
+                case "Right":
+                    switch (order) {
+                        case "TUN LEF":
+                            div.className = "Up";
+                            break;
+                        case "TUN RIG":
+                            div.className = "Button";
+                            break;
+                        case "TUN BAC":
+                            div.className = "Left";
+                            break;
+                        case "GO":
+                            if (position[0] == 10) {
+                                alert("再走就撞墙了哥");
+                                return false;
+                            }
+                            cellDark(position[0], position[1]);
+                            cellLight(position[0] + 1, position[1], div.className);
+                            position = [position[0] + 1, position[1]];
+                            break;
+                        default :
+                            alert("命令无效");
+                    }
+                    break;
+            }
+        }
+        function init() {
+            maketable(10, 10);
+            cellLight(5, 5);
+            var wewe = document.getElementsByClassName("target")[0];
+            wewe.style.transform = 'rotate(' + 90 + 'deg)';
+            orderSub.onclick = function () {
+                var txt = order.value;
+                var target = document.getElementsByClassName("target")[0];
+                changeDir(target, txt);
+            };
+        }
+        init();
+    </script>
+</body>
+</html>
