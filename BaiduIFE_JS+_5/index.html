@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务五：听指令的小方块（二）</title>
+    <style>
+        .container {
+            margin-left: 100px;
+            overflow: hidden;
+            width: 800px;
+        }
+        #chessboard {
+            position: relative;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+        #chessboard td {
+            border: 1px solid gray;
+            box-sizing: border-box;
+            display: table-cell;
+            width: 50px;
+            height: 50px;
+        }
+        .robot {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            position: relative;
+        }
+        .robotBox {
+            position: absolute;
+            transition: 1s;
+        }
+        .top {
+            width: 50px;
+            height: 15px;
+            position: absolute;
+            background-color: red;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>如图，实现一个类似棋盘的格子空间，每个格子用两个数字可以定位，一个红正方形的<br/>
+            DOM 在这个空间内，正方形中的红色边表示这是他的正面，有一个 input 输入框. <br/>
+            在输入框中允许输入如下指令，按下按钮后，使得正方形做相应动作:</p>
+            <ul type="none">
+                <li>GO：向蓝色边所面向的方向前进一格（一格等同于正方形的边长）</li>
+                <li>TUN LEF：向左转（逆时针旋转 90 度）</li>
+                <li>TUN RIG：向右转（顺时针旋转 90 度） </li>
+                <li>TUN BAC：向右转（旋转 180 度）</li>
+                <li>TRA LEF：向屏幕的左侧移动一格，方向不变</li>
+                <li>TRA TOP：向屏幕的上面移动一格，方向不变</li>
+                <li>TRA RIG：向屏幕的右侧移动一格，方向不变</li>
+                <li>TRA BOT：向屏幕的下面移动一格，方向不变</li>
+                <li>MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格</li>
+                <li>MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格</li>
+                <li>MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格</li>
+                <li>MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格</li>
+            </ul>
+        <p> 移动不能超出格子空间. </p>
+        <div class="robotBox">
+            <div class="robot">
+                <div class="top"></div>
+            </div>
+        </div>
+        <table id="chessboard">
+
+        </table>
+        <label for="order"></label>
+        <input type="text" name="order" id="order"/>
+        <button type="button" id="orderSub">提交</button>
+    </div>
+
+    <script type="text/javascript">
+        var chessboard = document.getElementById("chessboard");
+        var order = document.getElementById("order");
+        var orderSub = document.getElementById("orderSub");
+        var cubeBox = document.getElementsByClassName('robotBox')[0];
+        var face = 0;
+        var xPos = 358;
+        var yPos = 659;
+        var deg = 0;
+        //绘制表格棋盘
+        function maketable(ChessX, ChessY) {
+            var x = ChessX + 1;
+            var y = ChessY + 1;
+            for (var i = 0; i < y; i++) {
+                var tr = document.createElement("tr");
+                for (var j = 0; j < x; j++) {
+                    tr.appendChild(document.createElement("td"))
+                }
+                chessboard.appendChild(tr);
+            }
+            var firstX = chessboard.firstElementChild.childNodes;
+            for (var k = 1; k < firstX.length; k++) {
+                firstX[k].style.border = 0;
+                firstX[k].style.textAlign = "center";
+                firstX[k].innerText = k;
+            }
+            var firstY = chessboard.childNodes;
+            for (var q = 1; q < firstY.length; q++) {
+                firstY[q].firstElementChild.style.border = 0;
+                firstY[q].firstElementChild.style.textAlign = "center";
+                firstY[q].firstElementChild.innerText = q - 1;
+            }
+            cubeBox.style.left = xPos + 'px';
+            cubeBox.style.top = yPos + 'px';
+        }
+        //小方块对象
+        var cube = {
+            //x
+            xPos: function () {
+                xPos += 'px';
+                return cubeBox.style.left;
+            },
+            //y
+            yPos: function () {
+                yPos += 'px';
+                return cubeBox.style.top;
+            },
+            //
+            face: function () {
+                face = face % 4;
+                switch (face) {
+                    case 0:
+                        console.log(face, "朝上");
+                        return face;
+                    case 1:
+                        console.log(face, "朝左");
+                        return face;
+                    case 2:
+                        console.log(face, "朝下");
+                        return face;
+                    case 3:
+                        console.log(face, "朝右");
+                        return face;
+                }
+            },
+            go: function () {
+                switch (order.value) {
+                    case "GO":
+                        //边缘判定
+                        switch (face) {
+                            case 0:
+                                if (yPos > 460) {
+                                    yPos -= 50;
+                                    cubeBox.style.top = yPos + 'px';
+                                }
+                                break;
+                            case 1:
+                                if (xPos > 160) {
+                                    xPos -= 50;
+                                    cubeBox.style.left = xPos + 'px';
+                                }
+                                break;
+                            case 2:
+                                if (yPos < 900) {
+                                    yPos += 50;
+                                    cubeBox.style.top = yPos + 'px';
+                                }
+                                break;
+                            default:
+                                if (xPos < 600) {
+                                    xPos += 50;
+                                    cubeBox.style.left = xPos + 'px';
+                                }
+                                break;
+                        }
+                        break;
+                    case "TUN LEF":
+                        cube.turnLeft();
+                        break;
+                    case "TUN RIG":
+                        cube.turnRight();
+                        break;
+                    case "TUN BAC":
+                        cube.turnBack();
+                        break;
+                    //新加指令
+                    case "TRA LEF":
+                        cube.toLeft();
+                        break;
+                    case "TRA TOP":
+                        cube.toTop();
+                        break;
+                    case "TRA RIG":
+                        cube.toRight();
+                        break;
+                    case "TRA BOT":
+                        cube.toBottom();
+                        break;
+                    case "MOV LEF":
+                        cube.moveLeft();
+                        break;
+                    case "MOV TOP":
+                        cube.moveTop();
+                        break;
+                    case "MOV RIG":
+                        cube.moveRight();
+                        break;
+                    case "MOV BOT":
+                        cube.moveBottom();
+                        break;
+                }
+            },
+            turnLeft: function () {
+                face = face % 4;
+                deg -= 90;
+                face++;
+                cubeBox.style.transform = 'rotate(' + deg + 'deg)';
+                cube.face();
+            },
+            turnRight: function () {
+                face = face % 4;
+                deg += 90;
+                cubeBox.style.transform = "rotate(" + deg + "deg)";
+                face += 3;
+                cube.face()
+            },
+            turnBack: function () {
+                face = face % 4;
+                deg += 180;
+                cubeBox.style.transform = "rotate(" + deg + "deg)";
+                face += 2;
+                cube.face()
+            },
+            toLeft: function () {
+                if (xPos > 160) {
+                    xPos -= 50;
+                    cubeBox.style.left = xPos + 'px';
+                }
+            },
+            toRight: function () {
+                if (xPos < 600) {
+                    xPos += 50;
+                    cubeBox.style.left = xPos + 'px';
+                }
+            },
+            toTop: function () {
+                if (yPos > 460) {
+                    yPos -= 50;
+                    cubeBox.style.top = yPos + 'px';
+                }
+            },
+            toBottom: function () {
+                if (yPos < 900) {
+                    yPos += 50;
+                    cubeBox.style.top = yPos + 'px';
+                }
+            },
+            moveLeft: function () {
+                face = face % 4;
+                if (face != 1) {
+                    face = 1;
+                    deg = -90;
+                    cubeBox.style.transform = "rotate(" + deg + "deg)";
+                }
+                setTimeout(function () {
+                    cube.toLeft();
+                }, 800);
+            },
+            moveRight: function () {
+                face = face % 4;
+                if (face != 3) {
+                    face = 3;
+                    deg = 90;
+                    cubeBox.style.transform = "rotate(" + deg + "deg)";
+                }
+                setTimeout(function () {
+                    cube.toRight();
+                }, 800);
+            },
+            moveTop: function () {
+                face = face % 4;
+                if (face != 0) {
+                    face = 0;
+                    deg = 0;
+                    cubeBox.style.transform = "rotate(" + deg + "deg)";
+                }
+                setTimeout(function () {
+                    cube.toTop();
+                }, 800);
+            },
+            moveBottom: function () {
+                face = face % 4;
+                if (face != 2) {
+                    face = 2;
+                    deg = 180;
+                    cubeBox.style.transform = "rotate(" + deg + "deg)";
+                }
+                setTimeout(function () {
+                    cube.toBottom();
+                }, 800);
+            },
+        };
+        function init() {
+            maketable(10, 10);
+            orderSub.onclick = function () {
+                cube.go();
+            };
+        }
+        init();
+    </script>
+</body>
+</html>
